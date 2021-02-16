@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {Avatar} from '@material-ui/core';
 
 import './SidebarChat.css';
+import db from '../../firebase';
 
 const SidebarChat = ({AddNewChat, id, name}) => {
     const [seed, setSeed] = useState("");
@@ -14,8 +15,10 @@ const SidebarChat = ({AddNewChat, id, name}) => {
         const roomName = prompt("Adicione o nome para o chat ...")
 
         if(roomName){
-            
-        }
+            db.collection("rooms").add({
+                name: roomName
+            });
+        };
     };
 
     return !AddNewChat ? (
