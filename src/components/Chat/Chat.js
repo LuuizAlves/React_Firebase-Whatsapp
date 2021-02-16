@@ -4,15 +4,27 @@ import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import Search from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachFile from '@material-ui/icons/AttachFile';
+import InsertEmoticon from '@material-ui/icons/InsertEmoticon';
+import Mic from '@material-ui/icons/Mic';
+
+
 
 import './Chat.css';
 
 const Chat = () => {
     const [seed, setSeed] = useState("");
+    const [input, setInput] = useState("");
 
     useEffect(() => {
         setSeed(Math.floor(Math.random * 5000));
     }, [])
+
+    const sendMessage = (e) => {
+        e.preventDefault();
+        console.log(input);
+
+        setInput("");
+    }
 
     return (
         <div className="chat">
@@ -62,7 +74,18 @@ const Chat = () => {
             </div>
 
             <div class="chat__footer">
-
+                <InsertEmoticon />
+                <form>
+                    <input 
+                        type="text"
+                        placeholder="Escreva sua mensagem..."
+                        value={input}
+                        onChange={ e => setInput(e.target.value)}
+                        onClick={sendMessage}
+                    />
+                    <button>Enviar</button>
+                </form>
+                <Mic />
             </div>
         </div>
     )
