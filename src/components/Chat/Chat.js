@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react'
 import {Avatar, IconButton} from '@material-ui/core';
-import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 import Search from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachFile from '@material-ui/icons/AttachFile';
@@ -9,15 +8,20 @@ import Mic from '@material-ui/icons/Mic';
 
 import { useParams } from 'react-router-dom';
 import db from '../../firebase';
+import firebase from 'firebase';
+import { useStateValue } from '../../StateProvider';
 
 import './Chat.css';
 
 const Chat = () => {
     const [seed, setSeed] = useState("");
-    const [input, setInput] = useState("");
-     
+    const [input, setInput] = useState(""); 
     const [ roomName, setRoomName ] = useState("");
+    const [ messages, setMessages ] = useState([]);
+
+    const [ { user }, dispatch ] = useStateValue();
     const { roomId } = useParams();
+
 
     useEffect(() => {
         if(roomId){
@@ -26,6 +30,16 @@ const Chat = () => {
                 .onSnapshot( (snapshot) => {
                     setRoomName(snapshot.data().name);
                 });
+
+            db.collection("rooms")
+                .doc(roomId)
+                .collection("message")
+                .orderBy("timestamp", "asc")
+                .onSnapshot( snapshot => {
+                    setMessages( snapshot.docs.map( doc => 
+                        doc.data()
+                    ))
+                })
         }
     },[roomId]);
 
@@ -37,6 +51,15 @@ const Chat = () => {
         e.preventDefault();
         console.log(input);
 
+        db.collection("rooms")
+            .doc(roomId)
+            .collection("message")
+            .add({
+                message: input,
+                name: user.displayName,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+
         setInput("");
     }
 
@@ -46,7 +69,12 @@ const Chat = () => {
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`} />
                 <div className="chat_headerInfo">
                     <h3>{roomName}</h3>
-                    <p>Last seen at ...</p>
+                    <p>
+                        Last seen {" "}
+                        { new Date(
+                            messages[messages.length - 1]?.timestamp?.toDate()
+                        ).toUTCString()}
+                    </p>
                 </div>
 
                 <div className="chat_headerRight">
@@ -65,26 +93,17 @@ const Chat = () => {
             </div>
 
             <div className="chat__body">
-                <p class={`chat__message ${true && "chat__reciever"}`}>
-                    <span class="chat__name">
-                        User Name
-                    </span>
-                    Hey Guys...
-                    <span class="chat__timestamp">
-                        3:59pm
-                    </span>
-                    
-                </p>
-                <p class={`chat__message ${false && "chat__reciever"}`}>
-                    <span class="chat__name">
-                        User Name
-                    </span>
-                    Hey Guys...
-                    <span class="chat__timestamp">
-                        3:59pm
-                    </span>
-                    
-                </p>
+                {messages.map( message => (
+                    <p class={`chat__message ${message.name === user.displayName  && "chat__reciever"}`}>
+                        <span class="chat__name">
+                            {message.name}
+                        </span>
+                            {message.message}
+                        <span class="chat__timestamp">
+                            { new Date(message.timestamp?.toDate()).toUTCString()}
+                        </span>
+                    </p>   
+                ))}
             </div>
 
             <div class="chat__footer">
@@ -95,9 +114,8 @@ const Chat = () => {
                         placeholder="Escreva sua mensagem..."
                         value={input}
                         onChange={ e => setInput(e.target.value)}
-                        onClick={sendMessage}
                     />
-                    <button>Enviar</button>
+                    <button onClick={sendMessage}>Enviar</button>
                 </form>
                 <Mic />
             </div>

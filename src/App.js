@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import Sidebar from './components/Sidebar/Sidebar';
@@ -10,8 +10,6 @@ import './App.css';
 
 function App() {
     const [ { user }, dispatch ] = useStateValue();
-    console.log(user);
-
     
     return (
         <div className="App">
@@ -33,6 +31,6 @@ function App() {
     );
 }
 
-//feat: show messages based on room ✨
+//feat: Show messages based on room from Firebase ✨
 //feat: Add Google Authentication ✨
 export default App;
