@@ -31,6 +31,7 @@ function App() {
     );
 }
 
-//feat: Show messages based on room from Firebase ✨
+//feat: Show and Send messages based on room from Firebase ✨
 //feat: Add Google Authentication ✨
+//feat: Show Sidebar and Header Room last message from database ✨
 export default App;

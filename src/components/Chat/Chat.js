@@ -70,7 +70,7 @@ const Chat = () => {
                 <div className="chat_headerInfo">
                     <h3>{roomName}</h3>
                     <p>
-                        Last seen {" "}
+                        Visto por último {" "}
                         { new Date(
                             messages[messages.length - 1]?.timestamp?.toDate()
                         ).toUTCString()}
