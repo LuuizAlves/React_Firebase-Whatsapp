@@ -5,7 +5,7 @@ Essa aplicação possui algumas das funcionalidades básicas que é possível en
 
 Agradecimento ao Canal do YouTube <strong>Clever Programmer</strong> que em uma <a href="https://bit.ly/3qIxjch" target="_blank">live</a> de um pouco menos de 4h pode trazer tanto contéudo gratuito e de qualidade.
 
-### 🚀 Tecnologias Utilizadas
+### Tecnologias Utilizadas 🚀
 
 <p align="center">
   <img src="https://github.com/LuuizAlves/React_Firebase-Whatsapp/blob/master/github/Techs.png?raw=true" alt="Techs"/>
