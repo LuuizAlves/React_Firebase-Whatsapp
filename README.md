@@ -21,3 +21,4 @@ Nessa aplicação é possível utilizar a autenticação via Google. <br/>
 Isso é possível por se estar utilizando o Firebase que permite ter acesso a alguns dados como Nome, Email e Imagem de Perfil do usuário.
 
 ### Mensagem em Tempo Real 💬
+Simulação de uma bate papo com envio e recebimento de mensagens em tempo real, bem similar ao Whatsapp, nessa aplicação é possível conversar com outros usuários que estejam acessando ao mesmo tempo e podem ter acesso as salas cadastradas além de criar sua própria.
