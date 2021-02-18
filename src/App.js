@@ -13,20 +13,19 @@ function App() {
     
     return (
         <div className="App">
-
-        {!user ? (
-            <Login />
-        ):(
-            <div className="app_body">
-                <Router>
-                    <Sidebar />
-                    <Switch>
-                        <Route path="/rooms/:roomId" component={Chat} />
-                        <Route path="/" component={Chat} />
-                    </Switch>
-                </Router>
-            </div>
-        )}
+            {!user ? (
+                <Login />
+            ):(
+                <div className="app_body">
+                    <Router>
+                        <Sidebar />
+                        <Switch>
+                            <Route path="/rooms/:roomId" component={Chat} />
+                            <Route path="/" component={Chat} />
+                        </Switch>
+                    </Router>
+                </div>
+            )}
         </div>
     );
 }

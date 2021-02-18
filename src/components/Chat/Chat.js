@@ -3,6 +3,7 @@ import {Avatar, IconButton} from '@material-ui/core';
 import Search from '@material-ui/icons/Search';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import AttachFile from '@material-ui/icons/AttachFile';
+import Delete from '@material-ui/icons/Delete'
 import InsertEmoticon from '@material-ui/icons/InsertEmoticon';
 import Mic from '@material-ui/icons/Mic';
 
@@ -36,9 +37,10 @@ const Chat = () => {
                 .collection("message")
                 .orderBy("timestamp", "asc")
                 .onSnapshot( snapshot => {
-                    setMessages( snapshot.docs.map( doc => 
-                        doc.data()
-                    ))
+                    setMessages( snapshot.docs.map( doc => ({
+                        id: doc.id,
+                        data: doc.data()
+                    })))
                 })
         }
     },[roomId]);
@@ -61,6 +63,16 @@ const Chat = () => {
             })
 
         setInput("");
+    }
+
+    const deleteMessage = (message) => {
+        console.log(message.id);
+
+        db.collection("rooms")
+            .doc(roomId)
+            .collection("message")
+            .doc(message.id)
+            .delete()   
     }
 
     return (
@@ -94,14 +106,23 @@ const Chat = () => {
 
             <div className="chat__body">
                 {messages.map( message => (
-                    <p class={`chat__message ${message.name === user.displayName  && "chat__reciever"}`}>
+                    <p class={`chat__message ${message.data.name === user.displayName  && "chat__reciever"}`}>
                         <span class="chat__name">
-                            {message.name}
+                            {message.data.name}
                         </span>
-                            {message.message}
+                            {message.data.message}
                         <span class="chat__timestamp">
-                            { new Date(message.timestamp?.toDate()).toUTCString()}
+                            { new Date(message.data.timestamp?.toDate()).toUTCString()}
                         </span>
+                        
+                        {
+                            message.data.name === user.displayName && (
+                                <IconButton onClick={ () => deleteMessage(message)}>
+                                    <Delete />
+                                </IconButton>
+                            )
+                        }
+                                
                     </p>   
                 ))}
             </div>
