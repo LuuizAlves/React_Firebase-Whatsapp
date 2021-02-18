@@ -5,8 +5,20 @@ Essa aplicação possui algumas das funcionalidades básicas que é possível en
 
 Agradecimento ao Canal do YouTube <strong>Clever Programmer</strong> que em uma <a href="https://bit.ly/3qIxjch" target="_blank">live</a> de um pouco menos de 4h pode trazer tanto contéudo gratuito e de qualidade.
 
+### Tecnologias Utilizadas 🚀
+
+<p align="center">
+  <img src="https://github.com/LuuizAlves/React_Firebase-Whatsapp/blob/master/github/Techs.png?raw=true" alt="Techs"/>
+</p>
+
+- <a target="_blank" href="https://reactjs.org/">React JS</a>
+- <a target="_blank" href="https://firebase.google.com/docs">Firebase</a>
+- <a target="_blank" href="https://material-ui.com/pt/">Material UI</a>
+- <a target="_blank" href="https://redux.js.org/">Redux</a>
+
 ### Google Authentication 💻
 Nessa aplicação é possível utilizar a autenticação via Google. <br/>
 Isso é possível por se estar utilizando o Firebase que permite ter acesso a alguns dados como Nome, Email e Imagem de Perfil do usuário.
 
 ### Mensagem em Tempo Real 💬
+Simulação de uma bate papo com envio e recebimento de mensagens em tempo real, bem similar ao Whatsapp, nessa aplicação é possível conversar com outros usuários que estejam acessando ao mesmo tempo e podem ter acesso as salas cadastradas além de criar sua própria.
