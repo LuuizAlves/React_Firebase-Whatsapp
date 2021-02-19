@@ -84,7 +84,7 @@ const Chat = () => {
                     <p>
                         Visto por último {" "}
                         { new Date(
-                            messages[messages.length - 1]?.timestamp?.toDate()
+                            messages[messages.length - 1]?.data.timestamp?.toDate()
                         ).toUTCString()}
                     </p>
                 </div>

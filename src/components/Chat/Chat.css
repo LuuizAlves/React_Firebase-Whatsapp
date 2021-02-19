@@ -18,8 +18,9 @@
     margin-bottom: 3px;
     font-weight: 500;
 }
-.chat_headerInfo>p{
+.chat_headerInfo > p{
     color: gray;
+    font-size: xx-small;
 }
 .chat_headerRight{
     display: flex;
@@ -52,6 +53,7 @@
 .chat__timestamp {
     margin-left: 10px;
     font-size: xx-small;
+    color: gray;
 }
 
 .chat__body{
@@ -61,6 +63,7 @@
     background-position: center;
     padding: 30px;
     overflow-y: scroll;
+    
 }
 
 .chat__footer {

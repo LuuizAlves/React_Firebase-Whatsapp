@@ -5,12 +5,13 @@ import ChatIcon from '@material-ui/icons/Chat';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { SearchOutlined } from '@material-ui/icons';
 import SidebarChat from '../SidebarChat/SidebarChat';
+import Switch from 'react-switch';
 import db from '../../firebase';
 import './Sidebar.css';
 
 import { useStateValue } from '../../StateProvider';
 
-function Sidebar(){
+function Sidebar({toggleTheme, darkMode}){
    const [ rooms, setRooms ] = useState([]);
    const [ { user }, dispatch ] = useStateValue();
 
@@ -42,6 +43,13 @@ function Sidebar(){
                <IconButton>
                   <MoreVertIcon />
                </IconButton>
+
+               <Switch
+                  onChange={toggleTheme}
+                  checked={darkMode}
+                  checkedIcon={false}
+                  uncheckedIcon={false}
+               />
             </div>
          </div>
 

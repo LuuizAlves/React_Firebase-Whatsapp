@@ -18,6 +18,8 @@ a {
 .sidebarChat_info{
     margin-left: 15px;
 }
+
+.sidebarChat > h2,
 .sidebarChat_info > h2{
     font-size: 16px;
 }
